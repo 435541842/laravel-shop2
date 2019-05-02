@@ -15,5 +15,5 @@ class ProductSku extends Model
     }
 
 
-    
+
 }
