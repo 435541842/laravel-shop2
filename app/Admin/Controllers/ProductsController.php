@@ -78,7 +78,7 @@ class ProductsController extends Controller
 
         return $grid;
     }
-    
+
     //修改和创建对应form
     protected function form()
     {
