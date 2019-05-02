@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '新增收货地址')
+@section('title', ($address->id ? '修改': '新增') . '收货地址')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">
-                        新增收货地址
+                        {{ $address->id ? '修改': '新增' }}收货地址
                     </h2>
                 </div>
                 <div class="card-body">
@@ -25,14 +25,20 @@
                     <!-- 输出后端报错结束 -->
                     <!-- inline-template 代表通过内联方式引入组件 -->
                     <user-addresses-create-and-edit inline-template>
-                    <form class="form-horizontal" role="form" action="{{ route('user_addresses.store') }}" method="post">
+                        @if($address->id)
+                                <form class="form-horizontal" role="form" action="{{ route('user_addresses.update', ['user_address' => $address->id]) }}" method="post">
+                                {{ method_field('PUT') }}
+                            @else
+                                <form class="form-horizontal" role="form" action="{{ route('user_addresses.store') }}" method="post">
+                        @endif
                         <!-- 引入 csrf token 字段 -->
                             {{ csrf_field() }}
                         <!-- 注意这里多了 @change -->
                         <!-- inline-template 代表通过内联方式引入组件 -->
                         {{-- 像这种组件，都是多级联动的，除非给每个option加上onmouse事件 --}}
                         {{--select-district 就是我们的组件名称，之前在 JS 代码里通过 Vue.component('select-district', { /****/ }) 定义的。inline-template 则代表被 <select-district inline-template></select-district> 包裹的代码会作为这个组件的模板，也称为 内联模板。--}}
-                        <select-district  @change="onDistrictChanged" inline-template>
+                        {{-- 这里也是值得借鉴的地方 --}}
+                        <select-district :init-value="{{ json_encode([$address->province, $address->city, $address->district]) }}"  @change="onDistrictChanged" inline-template>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2 text-md-right">省市区</label>
                                 <div class="col-sm-3">
