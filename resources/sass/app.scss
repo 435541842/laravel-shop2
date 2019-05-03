@@ -117,7 +117,14 @@ body {
       }
     }
   }
+  //分页
   .pagination {
     margin-right: 5px;
+  }
+  //搜索框
+  .search-form {
+    padding: 0 5px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
   }
 }
