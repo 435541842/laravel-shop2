@@ -45,19 +45,30 @@
                             <div class="line"><div class="line-label">收货地址：</div><div class="line-value">{{ join(' ', $order->address) }}</div></div>
                             <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
                             <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
-                        </div>
-                        <!-- 输出物流状态 -->
-                        <div class="line">
-                            <div class="line-label">物流状态：</div>
-                            <div class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
-                        </div>
-                        <!-- 如果有物流信息则展示 -->
-                        @if($order->ship_data)
+                            <!-- 输出物流状态 -->
                             <div class="line">
-                                <div class="line-label">物流信息：</div>
-                                <div class="line-value">{{ $order->ship_data['express_company'] }} {{ $order->ship_data['express_no'] }}</div>
+                                <div class="line-label">物流状态：</div>
+                                <div class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
                             </div>
-                        @endif
+                            <!-- 如果有物流信息则展示 -->
+                            @if($order->ship_data)
+                                <div class="line">
+                                    <div class="line-label">物流信息：</div>
+                                    <div class="line-value">{{ $order->ship_data['express_company'] }} {{ $order->ship_data['express_no'] }}</div>
+                                </div>
+                            @endif
+                        <!-- 订单已支付，且退款状态不是未退款时展示退款信息 -->
+                            @if($order->paid_at && $order->refund_status !== \App\Models\Order::REFUND_STATUS_PENDING)
+                                <div class="line">
+                                    <div class="line-label">退款状态：</div>
+                                    <div class="line-value">{{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}</div>
+                                </div>
+                                <div class="line">
+                                    <div class="line-label">退款理由：</div>
+                                    <div class="line-value">{{ $order->extra['refund_reason'] }}</div>
+                                </div>
+                            @endif
+                        </div>
                         <div class="order-summary text-right">
                             <div class="total-amount">
                                 <span>订单总价：</span>
@@ -77,7 +88,7 @@
                                     @else
                                         未支付
                                     @endif
-                                    <!-- 如果订单的发货状态为已发货则展示确认收货按钮 -->
+                                <!-- 如果订单的发货状态为已发货则展示确认收货按钮 -->
                                     @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
                                         <div class="receive-button">
                                             <form method="post" action="{{ route('orders.received', [$order->id]) }}">
@@ -85,6 +96,12 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-sm btn-success">确认收货</button>
                                             </form>
+                                        </div>
+                                    @endif
+                                <!-- 订单已支付，且退款状态是未退款时展示申请退款按钮 -->
+                                    @if($order->paid_at && $order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
+                                        <div class="refund-button">
+                                            <button class="btn btn-sm btn-danger" id="btn-apply-refund">申请退款</button>
                                         </div>
                                     @endif
                                 </div>
@@ -96,7 +113,7 @@
                                     <button class="btn btn-sm btn-success" id='btn-wechat'>微信支付</button>
                                 </div>
                             @endif
-                        <!-- 支付按钮结束 -->
+                            <!-- 支付按钮结束 -->
                         </div>
                     </div>
                 </div>
@@ -145,6 +162,28 @@
                                 location.reload();
                             })
                     });
+            });
+
+            // 退款按钮点击事件
+            $('#btn-apply-refund').click(function () {
+                swal({
+                    text: '请输入退款理由',
+                    content: "input",
+                }).then(function (input) {
+                    // 当用户点击 swal 弹出框上的按钮时触发这个函数
+                    if(!input) {
+                        swal('退款理由不可空', '', 'error');
+                        return;
+                    }
+                    // 请求退款接口
+                    axios.post('{{ route('orders.apply_refund', [$order->id]) }}', {reason: input})
+                        .then(function () {
+                            swal('申请退款成功', '', 'success').then(function () {
+                                // 用户点击弹框上按钮时重新加载页面
+                                location.reload();
+                            });
+                        });
+                });
             });
         });
     </script>
