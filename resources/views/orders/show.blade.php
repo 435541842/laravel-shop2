@@ -90,13 +90,15 @@
                                     @endif
                                 <!-- 如果订单的发货状态为已发货则展示确认收货按钮 -->
                                     @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
-                                        <div class="receive-button">
-                                            <form method="post" action="{{ route('orders.received', [$order->id]) }}">
-                                                <!-- csrf token 不能忘 -->
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-sm btn-success">确认收货</button>
-                                            </form>
-                                        </div>
+                                            @if($order->refund_status !== \App\Models\Order::REFUND_STATUS_SUCCESS)
+                                                <div class="receive-button">
+                                                    <form method="post" action="{{ route('orders.received', [$order->id]) }}">
+                                                        <!-- csrf token 不能忘 -->
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-sm btn-success">确认收货</button>
+                                                    </form>
+                                                </div>
+                                            @endif
                                     @endif
                                 <!-- 订单已支付，且退款状态是未退款时展示申请退款按钮 -->
                                     @if($order->paid_at && $order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
