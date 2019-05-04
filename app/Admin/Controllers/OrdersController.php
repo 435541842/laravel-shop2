@@ -11,6 +11,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\Request;
+use App\Http\Requests\Admin\HandleRefundRequest;
 
 class OrdersController extends Controller
 {
