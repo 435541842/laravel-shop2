@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Exceptions\InvalidRequestException;
 use App\Models\OrderItem;
 use App\Models\Category;
+use App\Services\CategoryService;
 
 class ProductsController extends Controller
 {
@@ -61,6 +62,7 @@ class ProductsController extends Controller
             'products' => $products,
             // 等价于 isset($category) ? $category : null
             'category' => $category ?? null,
+            // 封装在了viewcomposer中
             'filters'  => [
                 'search' => $search,
                 'order'  => $order,
