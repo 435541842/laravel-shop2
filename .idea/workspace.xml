@@ -34,11 +34,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductsSeeder.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProductsSeeder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/ProductsSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
               <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CategoriesController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/CategoriesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="92" column="55" lean-forward="false" selection-start-line="92" selection-start-column="55" selection-end-line="92" selection-end-column="55" />
+              <folding>
+                <element signature="e#41#71#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Admin/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="715">
+              <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -70,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Listeners/UpdateProductSoldCount.php" />
         <option value="$PROJECT_DIR$/app/Notifications/OrderPaidNotification.php" />
         <option value="$PROJECT_DIR$/app/Listeners/SendOrderPaidMail.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/OrderRequest.php" />
@@ -96,7 +117,6 @@
         <option value="$PROJECT_DIR$/app/Models/Order.php" />
         <option value="$PROJECT_DIR$/database/factories/CouponCodeFactory.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/CouponCodesController.php" />
-        <option value="$PROJECT_DIR$/app/Admin/routes.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/CouponCodeUnavailableException.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/Handler.php" />
@@ -121,6 +141,8 @@
         <option value="$PROJECT_DIR$/database/seeds/CategoriesSeeder.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_05_14_170403_create_categories_table.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/app/Admin/routes.php" />
+        <option value="$PROJECT_DIR$/app/Admin/Controllers/CategoriesController.php" />
       </list>
     </option>
   </component>
@@ -452,12 +474,12 @@
       <workItem from="1556814375600" duration="737000" />
       <workItem from="1556816294527" duration="50440000" />
       <workItem from="1557648826205" duration="5041000" />
-      <workItem from="1558146370740" duration="8925000" />
+      <workItem from="1558146370740" duration="11095000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85416000" />
+    <option name="totallyTimeSpent" value="87586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -499,16 +521,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Events/OrderReviewed.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="e#30#66#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Listeners/UpdateProductSoldCount.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="673">
@@ -673,14 +685,6 @@
           <folding>
             <element signature="e#41#67#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="32" column="74" lean-forward="false" selection-start-line="32" selection-start-column="74" selection-end-line="32" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -934,6 +938,24 @@
         <state relative-caret-position="88">
           <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="715">
+          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/CategoriesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="92" column="55" lean-forward="false" selection-start-line="92" selection-start-column="55" selection-end-line="92" selection-end-column="55" />
+          <folding>
+            <element signature="e#41#71#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
